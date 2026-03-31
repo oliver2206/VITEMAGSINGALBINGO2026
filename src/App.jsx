@@ -1,121 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+
+import Generate from "./Generate";
+import Pattern from "./Pattern";
+import Checker from "./Checker";
+import Analyzer from "./Analyzer";
+import Gallery from "./Gallery";
+import Checker25 from "./Checker25";
+import Checker30 from "./Checker30";
+import Checker35 from "./Checker35";
+import Checker44 from "./Checker44";
+import Checker48 from "./Checker48";
+
+const letters = ["B","I","N","G","O"];
+
+const balls = Array.from({ length: 75 }, (_, i) => {
+  const number = i + 1;
+  const letter = letters[Math.floor(i / 15)];
+  return { letter, number };
+});
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [page, setPage] = useState("menu");
+
+  if(page === "generate") return <Generate goBack={()=>setPage("menu")} />;
+  if(page === "pattern") return <Pattern goBack={()=>setPage("menu")} />;
+  if(page === "checker") return <Checker goBack={()=>setPage("menu")} />;
+  if(page === "analyzer") return <Analyzer goBack={()=>setPage("menu")} />;
+  if(page === "gallery") return <Gallery goBack={()=>setPage("menu")} />;
+  if(page === "checker25") return <Checker25 goBack={()=>setPage("menu")} />;
+  if(page === "checker30") return <Checker30 goBack={()=>setPage("menu")} />;
+  if(page === "checker35") return <Checker35 goBack={()=>setPage("menu")} />;
+  if(page === "checker44") return <Checker44 goBack={()=>setPage("menu")} />;
+if(page === "checker48") return <Checker48 goBack={()=>setPage("menu")} />;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div className="container">
+
+      {/* Floating Balls */}
+      {balls.map((ball, index) => (
+        <div
+          key={index}
+          className={`ball ${ball.letter}`}
+          style={{
+            top: Math.random() * 90 + "%",
+            left: Math.random() * 90 + "%"
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <span>{ball.letter}</span>
+          <strong>{ball.number}</strong>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      ))}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Center Menu */}
+      <div className="menu">
+        <div className="menu-logo">
+          <span className="menu-logo-clover">🍀</span>
+        </div>
+        <h1>BINGO FORTUNE</h1>
+
+        <div className="menu-grid">
+          <button onClick={()=>setPage("generate")}>GENERATE</button>
+          <button onClick={()=>setPage("pattern")}>PATTERN</button>
+          <button onClick={()=>setPage("checker")}>CHECKER</button>
+          <button onClick={()=>setPage("analyzer")}>ANALYZER</button>
+          <button onClick={()=>setPage("gallery")}>GALLERY</button>
+          <button onClick={()=>setPage("checker25")}>CHECKER 25</button>
+          <button onClick={()=>setPage("checker30")}>CHECKER 30</button>
+          <button onClick={()=>setPage("checker35")}>CHECKER 35</button>
+          <button onClick={()=>setPage("checker44")}>CHECKER 44</button>
+          <button onClick={()=>setPage("checker48")}>CHECKER 48</button>
+        </div>
+      </div>
+
+    </div>
+  );
 }
 
-export default App
+export default App;
